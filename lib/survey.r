@@ -11,6 +11,8 @@ survey.2012 <- function(){
      "Principal Investigator / Lab Head / Management",
      "Senior Principal Investigator / Professor / Senior Management",
      "Staff Technician"))
+
+    married <- sapply(married, function(x) if (x == "Yes") 1 else 0 )
   })
 }
 
