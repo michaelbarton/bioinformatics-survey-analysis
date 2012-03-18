@@ -7,9 +7,10 @@ source('lib/survey.r')
 
 p <- ggplot(
   subset(survey.2012(), ! is.na(position)),
-  aes( y = satisfaction, x = position))
+  aes( y = satisfaction, x = region))
 
 p <- p + stat_boxplot()
+p <- p + facet_grid(position ~ .)
 p <- p + theme_bw()
 p <- p + scale_x_discrete("")
 p <- p + scale_y_continuous("Feeling of satisfaction (0-9)")
