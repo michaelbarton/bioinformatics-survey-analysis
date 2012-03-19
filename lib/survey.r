@@ -12,7 +12,8 @@ survey.2012 <- function(){
      "Senior Principal Investigator / Professor / Senior Management",
      "Staff Technician"))
 
-    married <- sapply(married, function(x) if (x == "Yes") 1 else 0 )
+    married <- sapply(married, function(x) switch(x, Yes = 1, No = 0, NA))
+
     salary  <- to.numeric.midpoint(salary)
   })
 }
