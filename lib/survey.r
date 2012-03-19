@@ -13,6 +13,7 @@ survey.2012 <- function(){
      "Staff Technician"))
 
     married <- sapply(married, function(x) if (x == "Yes") 1 else 0 )
+    salary  <- to.numeric.midpoint(salary)
   })
 }
 
@@ -24,4 +25,8 @@ survey <- function(file){
 
 format.date.string <- function(x,expr){
   as.Date(x, expr)
+}
+
+to.numeric.midpoint <- function(x){
+  sapply(strsplit(x,' - '), function(s) sum(as.numeric(gsub(',','',s))) / 2)
 }
