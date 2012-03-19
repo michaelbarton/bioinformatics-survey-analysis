@@ -8,7 +8,7 @@ source('lib/survey.r')
 
 p <- ggplot(
   ddply(subset(survey.2012(), ! is.na(position)),.(position),function(df){
-    data.frame(married = mean(df$married) * 100)
+    data.frame(married = mean(df$married, na.rm=TRUE) * 100)
   }),
   aes(y = married, x = position))
 
