@@ -18,6 +18,9 @@ survey.2012 <- function(){
         NA)
     })
 
+    agg.position         <- position
+    levels(agg.position)[levels(agg.position) == "Senior PI / Management"] <- "PI / Management"
+
     married <- sapply(married, function(x) switch(x, Yes = 1, No = 0, NA))
 
     salary  <- to.numeric.midpoint(salary)
