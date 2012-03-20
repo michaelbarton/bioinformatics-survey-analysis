@@ -15,6 +15,12 @@ survey.2012 <- function(){
     married <- sapply(married, function(x) switch(x, Yes = 1, No = 0, NA))
 
     salary  <- to.numeric.midpoint(salary)
+
+    filtered.region <- factor(region)
+    levels(filtered.region) <- sapply(levels(filtered.region),function(name){
+      if(length(filtered.region[filtered.region == name]) < 30) "Other" else name
+    })
+
   })
 }
 
