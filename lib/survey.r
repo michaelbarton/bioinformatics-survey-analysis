@@ -1,16 +1,22 @@
 survey.2012 <- function(){
   s <- survey('data/2012/data/survey.csv')
   within(s,{
-    position[position == ""] <- NA
-    position <- factor(position, levels=c(
-     "Under-graduate student",
-     "Masters Student",
-     "PhD Student",
-     "Post Doctoral Scientist (Researcher)",
-     "Post Doctoral Scientist (Staff)",
-     "Principal Investigator / Lab Head / Management",
-     "Senior Principal Investigator / Professor / Senior Management",
-     "Staff Technician"))
+
+    position         <- factor(position)
+    levels(position) <- sapply(levels(position),function(x){
+      switch(x,
+       "Staff Technician"                     = "Staff Technician",
+       "Under-graduate student"               = "Under-graduate",
+       "Masters Student"                      = "Masters Student",
+       "PhD Student"                          = "PhD Student",
+       "Post Doctoral Scientist (Researcher)" = "Post Doctoral (Research)",
+       "Post Doctoral Scientist (Staff)"      = "Post Doctoral (Staff)",
+       "Principal Investigator / Lab Head / Management" =
+         "PI / Management",
+       "Senior Principal Investigator / Professor / Senior Management" =
+         "Senior PI / Management",
+        NA)
+    })
 
     married <- sapply(married, function(x) switch(x, Yes = 1, No = 0, NA))
 
