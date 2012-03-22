@@ -9,7 +9,7 @@ survey.2012 <- function(){
        "Under-graduate student"               = "Under-graduate",
        "Masters Student"                      = "Masters Student",
        "PhD Student"                          = "PhD Student",
-       "Post Doctoral Scientist (Researcher)" = "Post Doctoral (Research)",
+       "Post Doctoral Scientist (Researcher)" = "Post Doctoral (Rsrch)",
        "Post Doctoral Scientist (Staff)"      = "Post Doctoral (Staff)",
        "Principal Investigator / Lab Head / Management" =
          "PI / Management",
