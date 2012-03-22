@@ -18,12 +18,18 @@ survey.2012 <- function(){
         NA)
     })
 
-    agg.position         <- position
+    agg.position <- position
     levels(agg.position)[levels(agg.position) == "Senior PI / Management"] <- "PI / Management"
+
+    agg.sector <- factor(sector)
+    levels(agg.sector)[levels(agg.sector) == "Industry - Other"] <- "Industry"
+    levels(agg.sector)[levels(agg.sector) == "Industry - Pharma"] <- "Industry"
 
     married <- sapply(married, function(x) switch(x, Yes = 1, No = 0, NA))
 
     salary  <- to.numeric.midpoint(salary)
+
+    age <- 2011 - year
 
     filtered.region <- factor(region)
     levels(filtered.region) <- sapply(levels(filtered.region),function(name){
