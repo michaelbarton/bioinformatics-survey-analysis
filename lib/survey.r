@@ -25,6 +25,19 @@ survey.2012 <- function(){
     levels(agg.sector)[levels(agg.sector) == "Industry - Other"] <- "Industry"
     levels(agg.sector)[levels(agg.sector) == "Industry - Pharma"] <- "Industry"
 
+    # Merge european regions together
+    agg.region <- sub("Europe, .*","Europe",region)
+
+    # Assume empty grant fields are 0
+    grants[grants == "" | is.na(grants)] <- 0
+    size[is.na(size)] <- 0
+
+    # Fill empty variables
+    first[first == ""]                 <- NA
+    publications[publications == ""]   <- NA
+    corresponding[corresponding == ""] <- NA
+    gender[gender == ""] <- NA
+
     married <- sapply(married, function(x) switch(x, Yes = 1, No = 0, NA))
 
     salary  <- to.numeric.midpoint(salary)
