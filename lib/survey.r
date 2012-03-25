@@ -18,6 +18,8 @@ survey.2012 <- function(){
         NA)
     })
 
+    age <- 2011 - year
+
     agg.position <- position
     levels(agg.position)[levels(agg.position) == "Senior PI / Management"] <- "PI / Management"
 
@@ -38,11 +40,17 @@ survey.2012 <- function(){
     corresponding[corresponding == ""] <- NA
     gender[gender == ""] <- NA
 
+    publications  <- as.numeric(publications)
+    first         <- as.numeric(first)
+    corresponding <- as.numeric(corresponding)
+    grants        <- as.numeric(grants)
+    age           <- as.numeric(age)
+    hours         <- as.numeric(hours)
+
     married <- sapply(married, function(x) switch(x, Yes = 1, No = 0, NA))
 
     salary  <- to.numeric.midpoint(salary)
 
-    age <- 2011 - year
 
     filtered.region <- factor(region)
     levels(filtered.region) <- sapply(levels(filtered.region),function(name){
