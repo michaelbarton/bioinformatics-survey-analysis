@@ -30,22 +30,30 @@ salary.regression.data <- function(){
 
   scaled.data <- within(na.omit(academics),{
 
+    # Try to normalise skewed variables
+    corresponding <- log(corresponding+1)
+    first         <- log(first+1)
+    grants        <- grants^(1/4)
+    publications  <- log(publications+1)
+    size          <- log(size+1) / 10
+
+    log.size <- floor(log10(size + 1)) / 10
+
     # Quadratic variables
-    square.grants        <- scale(grants^2)
+    # Grants and grant size not included as very skewed
     square.publications  <- scale(publications^2)
     square.first         <- scale(first^2)
     square.corresponding <- scale(corresponding^2)
     square.age           <- scale(age^2)
     square.hours         <- scale(hours^2)
 
-    log.size <- floor(log10(size + 1)) / 10
 
     # Identity
     size          <- scale(size)
     grants        <- scale(grants)
     publications  <- scale(publications)
     first         <- scale(first)
-    corresponding <- scale(corresponding)
+    corresponding <- scale(log(corresponding+1))
     age           <- scale(age)
     hours         <- scale(hours)
     salary        <- scale(salary)
@@ -58,5 +66,6 @@ salary.regression.data <- function(){
   })
 
   # Remove outliers
-  scaled.data[-c(10,11,19,76,107,110),]
+  #scaled.data[-c(10,11,19,76,107,110),]
+  scaled.data
 }
