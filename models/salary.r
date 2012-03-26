@@ -29,10 +29,19 @@ academics <- academics[
     "size")]
 
 scaled.data <- within(na.omit(academics),{
-  # 1/10 of log10  of grant size
-  size <- floor(log10(size + 1)) / 10
 
-  # Scale numeric variables
+  # Quadratic variables
+  square.grants        <- scale(grants^2)
+  square.publications  <- scale(publications^2)
+  square.first         <- scale(first^2)
+  square.corresponding <- scale(corresponding^2)
+  square.age           <- scale(age^2)
+  square.hours         <- scale(hours^2)
+
+  log.size <- floor(log10(size + 1)) / 10
+
+  # Identity
+  size          <- scale(size)
   grants        <- scale(grants)
   publications  <- scale(publications)
   first         <- scale(first)
@@ -61,16 +70,16 @@ full.model <- lm(salary ~
               grants        +
               size          +
 
-              # Quadratic terms
-              I(age^2)           +
-              I(hours^2)         +
-              I(publications^2)  +
-              I(first^2)         +
-              I(corresponding^2) +
-              I(grants^2)        +
-              I(size^2)          +
+              # Quadratic variables
+              square.age           +
+              square.hours         +
+              square.publications  +
+              square.first         +
+              square.corresponding +
+              square.grants        +
+              log.size             +
 
-              # Interaction of region with variables
+              # Interaction of region with identity variables
               agg.region:gender        +
               agg.region:age           +
               agg.region:agg.position  +
@@ -82,13 +91,13 @@ full.model <- lm(salary ~
               agg.region:size          +
 
               # Interaction of region with quadratic variables
-              agg.region:I(age^2)           +
-              agg.region:I(hours^2)         +
-              agg.region:I(publications^2)  +
-              agg.region:I(first^2)         +
-              agg.region:I(corresponding^2) +
-              agg.region:I(grants^2)        +
-              agg.region:I(size^2),
+              agg.region:square.age           +
+              agg.region:square.hours         +
+              agg.region:square.publications  +
+              agg.region:square.first         +
+              agg.region:square.corresponding +
+              agg.region:square.grants        +
+              agg.region:log.size,
 
               scaled.data)
 
@@ -96,14 +105,16 @@ full.model <- lm(salary ~
 model.1 <- step(full.model)
 summary(model.1)
 
-model.2 <- update(model.1, ~ .
+model.2 <- update(model.1, ~ . - 1
                   - size
-                  - I(publications^2)
-                  - I(size^2)
-                  - I(grants^2)
-                  - agg.region:I(grants^2)
-                  - agg.region:I(publications^2)
-                  - agg.region:size)
+                  - gender
+                  - square.age
+                  - square.grants
+                  - square.publications
+                  - log.size
+                  - agg.region:agg.position
+                  - agg.region:log.size
+                  - agg.region:square.grants)
 
 summary(model.2)
 
