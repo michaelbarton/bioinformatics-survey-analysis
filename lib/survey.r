@@ -51,8 +51,6 @@ survey.2012 <- function(){
       )
     }))
 
-    print(levels(agg.degree))
-
     # Merge european regions together
     agg.region <- sub("Europe, .*","Europe",region)
 
