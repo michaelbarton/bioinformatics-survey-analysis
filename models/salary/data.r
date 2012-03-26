@@ -42,13 +42,12 @@ salary.regression.data <- function(){
     log.size <- floor(log10(size + 1)) / 10
 
     # Quadratic variables
-    # Grants and grant size not included as very skewed
+    # Grants, grant size, corresponding, and conferences not included as very
+    # skewed
     square.publications  <- scale(publications^2)
     square.first         <- scale(first^2)
-    square.corresponding <- scale(corresponding^2)
     square.age           <- scale(age^2)
     square.hours         <- scale(hours^2)
-    conferences          <- scale(conferences^2)
 
     # Identity
     size          <- scale(size)
