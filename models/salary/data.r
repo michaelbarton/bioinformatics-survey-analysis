@@ -5,6 +5,9 @@ source('lib/survey.r')
 salary.regression.data <- function(){
 
   # Filter for academics from US/Europe with PhD
+  # Didn't filter for degree background as this has no effect on model
+  # prediction
+
   academics <- subset(survey.2012(),
                       position    != "PhD Student"      &
                       position    != "Staff Technician" &
@@ -15,12 +18,12 @@ salary.regression.data <- function(){
   # Select regression variables
   academics <- academics[
     c("salary",
-      "agg.degree",
       "agg.region",
       "gender",
       "age",
       "agg.position",
       "hours",
+      "conferences",
       "publications",
       "first",
       "corresponding",
@@ -45,7 +48,7 @@ salary.regression.data <- function(){
     square.corresponding <- scale(corresponding^2)
     square.age           <- scale(age^2)
     square.hours         <- scale(hours^2)
-
+    conferences          <- scale(conferences^2)
 
     # Identity
     size          <- scale(size)
@@ -56,6 +59,7 @@ salary.regression.data <- function(){
     age           <- scale(age)
     hours         <- scale(hours)
     salary        <- scale(salary)
+    conferences   <- scale(conferences)
 
     # Factors
     agg.region   <- factor(agg.region)
@@ -64,5 +68,5 @@ salary.regression.data <- function(){
   })
 
   # Remove outliers
-  scaled.data[-c(10,11,71,76,108),]
+  scaled.data[-c(12,13,30,78,84),]
 }
