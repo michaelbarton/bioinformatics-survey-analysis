@@ -6,7 +6,6 @@ salary.regression.data <- function(){
 
   # Filter for academics from US/Europe with PhD
   academics <- subset(survey.2012(),
-                      agg.degree  != "Other"            &
                       position    != "PhD Student"      &
                       position    != "Staff Technician" &
                       education   == "PhD"              &
@@ -61,7 +60,6 @@ salary.regression.data <- function(){
     # Factors
     agg.region   <- factor(agg.region)
     agg.position <- factor(agg.position)
-    agg.degree   <- factor(agg.degree)
     gender       <- factor(gender)
   })
 
