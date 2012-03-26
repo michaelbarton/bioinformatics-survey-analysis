@@ -56,7 +56,12 @@ survey.2012 <- function(){
     agg.region <- sub("Europe, .*","Europe",region)
 
     # Assume empty grant fields are 0
-    grants[grants == "" | is.na(grants)] <- 0
+    grants <- as.numeric(grants)
+    grants[is.na(grants)] <- 0
+
+    publications <- as.numeric(publications)
+    publications[is.na(publications)] <- 0
+
     size[is.na(size)] <- 0
 
     # Fill empty variables
@@ -65,12 +70,12 @@ survey.2012 <- function(){
     corresponding[corresponding == ""] <- NA
     gender[gender == ""] <- NA
 
-    publications  <- as.numeric(publications)
     first         <- as.numeric(first)
     corresponding <- as.numeric(corresponding)
-    grants        <- as.numeric(grants)
     age           <- as.numeric(age)
     hours         <- as.numeric(hours)
+
+    conferences[conferences == ""] <- 0
     conferences   <- as.numeric(conferences)
 
     married <- sapply(married, function(x) switch(x, Yes = 1, No = 0, NA))
