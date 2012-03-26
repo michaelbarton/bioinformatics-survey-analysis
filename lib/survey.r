@@ -27,6 +27,32 @@ survey.2012 <- function(){
     levels(agg.sector)[levels(agg.sector) == "Industry - Other"] <- "Industry"
     levels(agg.sector)[levels(agg.sector) == "Industry - Pharma"] <- "Industry"
 
+    agg.degree <- factor(sapply(degree,function(x){
+      switch(x,
+        "Biology"                = identity(x),
+        "Computing Science"      = identity(x),
+
+        "Molecular Genetics"     =,
+        "Molecular Biology"      =,
+        "Microbiology"           =,
+        "Quantitative Biology"   =,
+        "Bioscience"             =,
+        "biotechnology"          =,
+        "genetics"               =,
+        "Genetics"               =,
+        "quantitative genetics"  =,
+        "biochemistry"           =,
+        "Biochemistry"           = "Biology",
+
+        "Computer Engineering"   = ,
+        "Informatin Systems"     = ,
+        "Information Technology" = "Computing Science",
+        "Other"
+      )
+    }))
+
+    print(levels(agg.degree))
+
     # Merge european regions together
     agg.region <- sub("Europe, .*","Europe",region)
 
