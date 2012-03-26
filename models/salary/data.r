@@ -57,5 +57,6 @@ salary.regression.data <- function(){
     gender       <- factor(gender)
   })
 
-  scaled.data
+  # Remove outliers
+  scaled.data[-c(10,11,19,76,107,110),]
 }
