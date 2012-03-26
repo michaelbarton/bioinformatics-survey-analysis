@@ -66,6 +66,5 @@ salary.regression.data <- function(){
   })
 
   # Remove outliers
-  #scaled.data[-c(10,11,19,76,107,110),]
-  scaled.data
+  scaled.data[-c(10,11,71,76,108),]
 }
