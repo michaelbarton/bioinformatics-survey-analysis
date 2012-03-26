@@ -51,6 +51,7 @@ survey.2012 <- function(){
       )
     }))
 
+
     # Merge european regions together
     agg.region <- sub("Europe, .*","Europe",region)
 
@@ -70,6 +71,7 @@ survey.2012 <- function(){
     grants        <- as.numeric(grants)
     age           <- as.numeric(age)
     hours         <- as.numeric(hours)
+    conferences   <- as.numeric(conferences)
 
     married <- sapply(married, function(x) switch(x, Yes = 1, No = 0, NA))
 
