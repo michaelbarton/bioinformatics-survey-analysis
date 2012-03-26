@@ -8,15 +8,17 @@ source('lib/generate_plot_file.r')
 
 # Filter for academics from US/Europe with PhD
 academics <- subset(survey.2012(),
+                    agg.degree  != "Other"            &
                     position    != "PhD Student"      &
                     position    != "Staff Technician" &
                     education   == "PhD"              &
                     sector      == "Academia"         &
-                    (agg.region == "Europe"      | agg.region == "America, Northern"))
+                    (agg.region == "Europe" | agg.region == "America, Northern"))
 
 # Select regression variables
 academics <- academics[
   c("salary",
+    "agg.degree",
     "agg.region",
     "gender",
     "age",
@@ -53,6 +55,7 @@ scaled.data <- within(na.omit(academics),{
   # Factors
   agg.region   <- factor(agg.region)
   agg.position <- factor(agg.position)
+  agg.degree   <- factor(agg.degree)
   gender       <- factor(gender)
 })
 
