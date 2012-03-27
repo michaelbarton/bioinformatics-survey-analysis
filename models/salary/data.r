@@ -6,7 +6,7 @@ salary.regression.data <- function(){
 
   # Filter for academics from US/Europe with PhD
   # Didn't filter for degree background as this has no effect on model
-  # prediction
+  # prediction and reduces the number of observations
 
   academics <- subset(survey.2012(),
                       position    != "PhD Student"      &
@@ -30,12 +30,17 @@ salary.regression.data <- function(){
       "grants",
       "size")]
 
-  scaled.data <- within(na.omit(academics),{
+  data <- within(na.omit(academics),{
     # Factors
     agg.region   <- factor(agg.region)
     agg.position <- factor(agg.position)
     gender       <- factor(gender)
+
+    # Transform publication data
+    first         <- log(first         + 0.00001)
+    corresponding <- log(corresponding + 0.00001)
+    publications  <- log(publications  + 0.00001)
   })
 
-  scaled.data
+  data
 }
