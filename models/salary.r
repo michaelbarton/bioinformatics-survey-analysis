@@ -38,3 +38,4 @@ full.model <- lmRob(full.formula, data = salary.regression.data())
 model.1 <- step.lmRob(full.model)
 
 write.csv(summary(model.1)$coefficients, file="./model_salary_estimates.csv")
+write.csv(summary(model.1)$cov,          file="./model_salary_covariance.csv")
