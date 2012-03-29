@@ -7,7 +7,6 @@ source('models/salary/data.r')
 
 full.formula <- formula(salary ~
 
-              # Identity variables
               agg.region    +
               gender        +
               age           +
@@ -20,7 +19,7 @@ full.formula <- formula(salary ~
               conferences   +
               size          +
 
-              # Interaction identity variables
+              # Interaction with region
               agg.region:gender        +
               agg.region:age           +
               agg.region:agg.position  +
@@ -38,4 +37,4 @@ full.model <- lmRob(full.formula, data = salary.regression.data())
 
 model.1 <- step.lmRob(full.model)
 
-summary(model.1)
+write.csv(summary(model.1)$coefficients, file="./model_salary_estimates.csv")
