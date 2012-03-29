@@ -44,7 +44,6 @@ marginals <- within(marginals,{
   region[constant.terms] <- "None"
   region <- factor(region,c("None","Northern America","Europe"))
 
-
   X <- sapply(X,function(x){
     switch(x,
       size          = "Largest Grant Size ($)",
@@ -62,6 +61,7 @@ marginals <- within(marginals,{
       x
     )
   })
+
   X <- factor(X,rev(c(
       "Male Gender",
       "Average Conference Attendence",
@@ -91,7 +91,7 @@ p <- p + geom_point()
 p <- p + coord_flip()
 p <- p + theme_bw()
 p <- p + scale_color_hue("Interaction Term")
-p <- p + scale_y_continuous("Estimated Regression Coefficient")
+p <- p + scale_y_continuous("Estimated Effect")
 p <- p + scale_x_discrete("")
 p <- p + geom_abline(v=0,lty=2,col="grey")
 p <- p + opts(legend.position = "top")
